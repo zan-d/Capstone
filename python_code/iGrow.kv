@@ -1,0 +1,39 @@
+#:import plants plants
+#:import navigation_screen_manager navigation_screen_manager
+#:import boxlayout_action_bar boxlayout_action_bar
+
+MyScreenManager:
+
+<MyScreenManager>:
+    Screen:
+        name: "HomeScreen"
+        BoxLayout:
+            orientation: "vertical"
+
+            Button:
+                text: "Select Plant"
+                on_press: app.manager.push("PlantsWindow")
+
+            Button:
+                text: "Fan"
+
+            Button:
+                text: "Water"
+
+            Button:
+                text: "Light"
+
+    Screen:
+        name: "PlantsWindow"
+        BoxLayoutActionBar:
+            title: "Home"
+            PlantsWindow:
+
+
+
+
+
+
+
+
+
