@@ -1,0 +1,27 @@
+
+<HomeScreen>:
+    selected_plant: selected_plant
+
+    BoxLayout:
+        orientation: "vertical"
+
+        Label:
+            id: selected_plant
+            text: app.current_plant
+
+        Button:
+            text: "Select Plant"
+            on_press: app.manager.push("PlantsWindow")
+
+        GridLayout:
+            cols: 3
+
+            Button:
+                text: "Fan"
+
+            Button:
+                text: "Water"
+
+            Button:
+                text: "Light"
+        

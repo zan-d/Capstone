@@ -1,3 +1,5 @@
+import pprint
+from kivy.app import App
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.lang import Builder
@@ -16,25 +18,19 @@ class PlantsWindow(Screen):
 
     def __init__(self, **kwargs):
         super(PlantsWindow, self).__init__(**kwargs)
-        self.plant_data = {}
         with open('plant_data.csv') as f:
             for row in f:
                 row = row.strip().split(",")
-                self.plant_data[row[0]] = {}
-                self.plant_data[row[0]]['temp_l'] = row[1]
-                self.plant_data[row[0]]['temp_h'] = row[2]
-                self.plant_data[row[0]]['light_hours'] = row[3]
-                self.plant_data[row[0]]['ph_l'] = row[4]
-                self.plant_data[row[0]]['ph_h'] = row[5]
-            # pprint.pprint(plant_data)
+                self.plants = Plants(row[0], row[1], row[2], row[3], row[4], row[5])
+        # pprint.pprint(Plants.PlantData)
         Clock.schedule_once(self.create_scrollview)
 
     def create_scrollview(self, dt):
         layout = GridLayout(cols=1)
         layout.bind(minimum_height=layout.setter("height"))
 
-        for plant in self.plant_data.keys():
-            button = Button(text=str(plant), size_hint=(1, 0.1), on_press=self.on_plant_select)
+        for plant in Plants.PlantData:
+            button = Button(text=str(plant.name), size_hint=(1, 0.1), on_press=self.on_plant_select)
             layout.add_widget(button)
         scrollview = ScrollView(size=(Window.width, Window.height))
         scrollview.add_widget(layout)
@@ -42,7 +38,37 @@ class PlantsWindow(Screen):
 
     def on_plant_select(self, instance):
         self.name = instance.text
-        print(self.name)
+        # print(self.name)
+        App.get_running_app().current_plant = self.name
+        for plant in Plants.PlantData:
+            if plant.name == self.name:
+                App.get_running_app().current_temp_l = plant.temp_l
+                App.get_running_app().current_temp_h = plant.temp_h
+                App.get_running_app().current_light_h = plant.light_h
+                App.get_running_app().current_ph_l = plant.ph_l
+                App.get_running_app().current_ph_h = plant.ph_h
+                break
+        # print(App.get_running_app().current_plant)
+        App.get_running_app().manager.pop()
 
-    def on_pre_leave(self):
-        self.plants_view.clear_widgets()
+
+class Plants:
+    PlantData = []
+
+    name = ""
+    temp_l = 0
+    temp_h = 0
+    light_h = 0
+    ph_l = 0.0
+    ph_h = 0.0
+
+    def __init__(self, name, temp_l, temp_h, light_h, ph_l, ph_h):
+        if not(any(x.name == name for x in self.PlantData)):
+            self.PlantData.append(self)
+            self.name = name
+            self.temp_l = temp_l
+            self.temp_h = temp_h
+            self.light_h = light_h
+            self.ph_l = ph_l
+            self.ph_h = ph_h
+
