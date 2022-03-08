@@ -30,7 +30,7 @@ class PlantsWindow(Screen):
         layout.bind(minimum_height=layout.setter("height"))
 
         for plant in Plants.PlantData:
-            button = Button(text=str(plant.name), size_hint=(1, 0.1), on_press=self.on_plant_select)
+            button = Button(text=str(plant.name), size_hint=(1, 0.1), on_press=self.on_plant_select, background_normal='', color=(0, 0, 0))
             layout.add_widget(button)
         scrollview = ScrollView(size=(Window.width, Window.height))
         scrollview.add_widget(layout)
@@ -48,7 +48,7 @@ class PlantsWindow(Screen):
                 App.get_running_app().current_ph_l = plant.ph_l
                 App.get_running_app().current_ph_h = plant.ph_h
                 break
-        # print(App.get_running_app().current_plant)
+        App.get_running_app().manager.get_screen('HomeScreen').plant_details()
         App.get_running_app().manager.pop()
 
 

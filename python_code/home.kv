@@ -1,27 +1,70 @@
+#:set r 56
+#:set g 133
+#:set b 105
 
 <HomeScreen>:
     selected_plant: selected_plant
+    name: "HomeScreen"
+    id: home_screen
 
     BoxLayout:
         orientation: "vertical"
 
-        Label:
-            id: selected_plant
-            text: app.current_plant
+        Image:
+            source: "images/iGrow_logo_pink.png"
+            allow_stretch: True
+            size_hint: 1, 0.1
 
-        Button:
-            text: "Select Plant"
-            on_press: app.manager.push("PlantsWindow")
+        BoxLayout:
+            orientation: "vertical"
+            canvas.before:
+                Color:
+                    rgb: 1, 1, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
 
-        GridLayout:
-            cols: 3
+            Label:
+                text: app.current_plant
+                color: 0, 0, 0
+                size_hint: 1, 0.3
+
+            GridLayout:
+                cols: 2
+
+                Label:
+                    text: "Temperature"
+                    color: 0, 0, 0
+
+                Label:
+                    text: "Moisture"
+                    color: 0, 0, 0
 
             Button:
-                text: "Fan"
+                text: "Select Plant"
+                background_normal: ""
+                background_color: r/255, g/255, b/255
+                on_press: app.manager.push("PlantsWindow")
 
-            Button:
-                text: "Water"
+            GridLayout:
+                cols: 3
 
-            Button:
-                text: "Light"
-        
+                Button:
+                    text: "Fan"
+                    background_normal: ""
+                    background_color: r/255, g/255, b/255
+
+                Button:
+                    text: "Water"
+                    background_normal: ""
+                    background_color: r/255, g/255, b/255
+
+                Button:
+                    text: "Light"
+                    background_normal: ""
+                    background_color: r/255, g/255, b/255
+
+            Label:
+                id: selected_plant
+                text: "Please select plant"
+                color: 0, 0, 0

@@ -2,6 +2,7 @@
 from kivy.app import App
 from kivy.properties import ObjectProperty, StringProperty, NumericProperty
 from navigation_screen_manager import NavigationScreenManager
+from kivy.core.window import Window
 
 import pprint
 import serial
@@ -22,6 +23,7 @@ class iGrow(App):
     current_ph_h = NumericProperty()
 
     def build(self):
+        Window.clearcolor = (56/255, 133/255, 105/255, 1)
         self.manager = MyScreenManager()
         return self.manager
 
