@@ -49,25 +49,29 @@
             GridLayout:
                 cols: 4
 
-                Button:
-                    text: "Fan"
-                    background_normal: ""
-                    background_color: r/255, g/255, b/255
-
-                Button:
+                ToggleButton:
                     text: "Water"
                     background_normal: ""
                     background_color: r/255, g/255, b/255
+                    on_state: root.on_toggle_state(self,"water")
 
-                Button:
-                    text: "Light"
-                    background_normal: ""
-                    background_color: r/255, g/255, b/255
-
-                Button:
+                ToggleButton:
                     text: "Heat"
                     background_normal: ""
                     background_color: r/255, g/255, b/255
+                    on_state: root.on_toggle_state(self,"heat")
+
+                ToggleButton:
+                    text: "Light"
+                    background_normal: ""
+                    background_color: r/255, g/255, b/255
+                    on_state: root.on_toggle_state(self,"light")
+
+                ToggleButton:
+                    text: "Fan"
+                    background_normal: ""
+                    background_color: r/255, g/255, b/255
+                    on_state: root.on_toggle_state(self,"fan")
 
             Label:
                 id: selected_plant
