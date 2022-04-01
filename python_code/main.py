@@ -21,6 +21,8 @@ class iGrow(App):
     current_light_h = NumericProperty()
     current_ph_l = NumericProperty()
     current_ph_h = NumericProperty()
+    current_moist_h = NumericProperty()
+    current_moist_l = NumericProperty()
 
     def build(self):
         Window.clearcolor = (56/255, 133/255, 105/255, 1)

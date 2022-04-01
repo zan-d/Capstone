@@ -21,7 +21,7 @@ class PlantsWindow(Screen):
         with open('plant_data.csv') as f:
             for row in f:
                 row = row.strip().split(",")
-                self.plants = Plants(row[0], row[1], row[2], row[3], row[4], row[5])
+                self.plants = Plants(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7])
         # pprint.pprint(Plants.PlantData)
         Clock.schedule_once(self.create_scrollview)
 
@@ -47,6 +47,8 @@ class PlantsWindow(Screen):
                 App.get_running_app().current_light_h = plant.light_h
                 App.get_running_app().current_ph_l = plant.ph_l
                 App.get_running_app().current_ph_h = plant.ph_h
+                App.get_running_app().current_moist_l = plant.moist_l
+                App.get_running_app().current_moist_h = plant.moist_h
                 break
         App.get_running_app().manager.get_screen('HomeScreen').plant_details()
         App.get_running_app().manager.pop()
@@ -61,8 +63,10 @@ class Plants:
     light_h = 0
     ph_l = 0.0
     ph_h = 0.0
+    moist_l = 0
+    moist_h = 0
 
-    def __init__(self, name, temp_l, temp_h, light_h, ph_l, ph_h):
+    def __init__(self, name, temp_l, temp_h, light_h, ph_l, ph_h, moist_l, moist_h):
         if not(any(x.name == name for x in self.PlantData)):
             self.PlantData.append(self)
             self.name = name
@@ -71,4 +75,6 @@ class Plants:
             self.light_h = light_h
             self.ph_l = ph_l
             self.ph_h = ph_h
+            self.moist_l = moist_l
+            self.moist_h = moist_h
 
