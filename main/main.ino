@@ -51,14 +51,14 @@ float findTemp() {
       delay(1);
     }
     tempSensorVal = tempSensorVal / 100.0;
-    Serial.println("tempSensorVal: ");
-    Serial.println(tempSensorVal);
+//    Serial.println("tempSensorVal: ");
+//    Serial.println(tempSensorVal);
     
     float R = 1023.0/tempSensorVal-1.0;
     R = 100000*R;
     float temperature = 1.0/(log(R/100000)/B+1/298.15)-273.15; // convert to temperature via datasheet
-    Serial.println("Temp:");
-    Serial.println(temperature);
+//    Serial.println("Temp:");
+//    Serial.println(temperature);
     return temperature;
 }
 float MGRead(int CO2Pin)
@@ -91,7 +91,44 @@ int findCO2() {
     return CO2Level;
 }
 
+char readMsgFromPi() {
+//Msg types:
+//  D: Definion of plant -  when an user selects the type of a plant - coming from database
+//  S: Set up by User - when an user changes environment such as temp or light
+//  N: No msg available - no updates of Message  
+  char msgType = 'N';
+  if (Serial.available()){
+   
+        String a = Serial.readString();
+        /*
+        String tempString
+        std::string s = a;
+        std::string delim = ",";
+        int start = 0U;
+        int end = s.find(delim);
+        while (end != std::string::npos)
+        {
+            tempString = s.substr(start, end - start);
+            start = end + delim.length();
+            end = s.find(delim, start);
+        }
+        */
+        //Serial.println("print?");
+        //Serial.println(a);  
+        //Serial.println("printed");
 
+        Serial.println(String("echo: ") + a);
+//        delay(10);
+//        Serial.print("Arduino");
+        return msgType;
+
+    } else {
+//       Serial.println("nothing to read");
+//       Serial.write("Arduino - not run ");
+       return msgType;
+    }
+
+}
 
 void setup() { 
  Serial.begin(9600);
@@ -106,14 +143,17 @@ void loop() {
     moistureVal = findMoisture() ;
     tempVal = findTemp() ;
     CO2Val = findCO2() ;
-    Serial.println("Moisture: ");
-    Serial.println(moistureVal);
-    Serial.println("\t");
-    Serial.println("Temperature: "); 
-    Serial.println(tempVal);
-    Serial.println("\t");
-    Serial.println("CO2 Level: ");
-    Serial.println(CO2Val);
-    Serial.println("\n"); 
-    delay(1000);
+    
+//    Serial.println("Moisture: ");
+//    Serial.println(moistureVal);
+//    Serial.println("\t");
+//    Serial.println("Temperature: "); 
+//    Serial.println(tempVal);
+//    Serial.println("\t");
+//    Serial.println("CO2 Level: ");
+//    Serial.println(CO2Val);
+//    Serial.println("\n"); 
+    char type = readMsgFromPi();
+    Serial.println(moistureVal + String(",") + tempVal + String(",") + CO2Val);
+    delay(5000);
 }
