@@ -10,19 +10,17 @@ Builder.load_file("home.kv")
 
 class HomeScreen(Screen):
     app = App.get_running_app()
+    temp_text = StringProperty("Temperature")
+    moist_text = StringProperty("Moisture")
+    co2_text = StringProperty("CO2")
 
-    # ser = serial.Serial()
-    # ser.baudrate = 9600
-    # ser.port = 'COM4'
-    #
-    # ser.open()
-    
     def __init__(self, **kwargs):
         super(HomeScreen, self).__init__(**kwargs)
         self.fan_button = 0
         self.water_button = 0
         self.light_button = 0
         self.heat_button = 0
+        Clock.schedule_interval(self.update_labels, 5)
 
     def plant_details(self):
         if self.app.current_plant != "Please select plant":
@@ -56,6 +54,19 @@ class HomeScreen(Screen):
         elif button_name == "fan":
             self.fan_button = state
 
-        print("Water: {} Heat: {} Light: {} Fan: {}".format(self.water_button, self.heat_button, self.light_button, self.fan_button))
+        print("Water: {} Heat: {} Light: {} Fan: {}".format(self.water_button, self.heat_button, self.light_button,
+                                                            self.fan_button))
         # serial write button states
         # ser.write(b"S,\n")
+
+    def update_labels(self, *args):
+        with serial.Serial('COM8', 9600) as ser:
+            status = ser.readline()
+            while ser.inWaiting() > 0:
+                status = ser.readline()
+            data = status
+            print(data)
+            data = data.strip()
+            ser.close()
+            # self.moist_text, self.temp_text, self.co2_text = data.decode('ascii').split(',')
+

@@ -30,14 +30,18 @@
                 size_hint: 1, 0.3
 
             GridLayout:
-                cols: 2
+                cols: 3
 
                 Label:
-                    text: "Temperature"
+                    text: root.temp_text
                     color: 0, 0, 0
 
                 Label:
-                    text: "Moisture"
+                    text: root.moist_text
+                    color: 0, 0, 0
+
+                Label:
+                    text: root.co2_text
                     color: 0, 0, 0
 
             Button:
