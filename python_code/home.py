@@ -23,17 +23,19 @@ class HomeScreen(Screen):
         self.heat_button = 0
 
         self.com = 'COM8'
-        self.baudrate = 9600
+        self.baudrate = 57600
         self.ser = serial.Serial(self.com, self.baudrate)
         sleep(2)
         Clock.schedule_interval(self.update_labels, 10)
+        Clock.schedule_interval(self.send_emtpyLine, 2)
 
     def plant_details(self):
         if self.app.current_plant != "Please select plant":
             # serial write ideal plant properties
             # with serial.Serial(self.com, self.baudrate) as ser:
-            status = "D,{},{},{},{},{}\n".format(self.app.current_temp_l, self.app.current_temp_h, self.app.current_light_h,
-                                               self.app.current_moist_l, self.app.current_moist_h)
+            status = "D,{},{},{},{},{}\n".format(self.app.current_temp_l, self.app.current_temp_h,
+                                                 self.app.current_light_h,
+                                                 self.app.current_moist_l, self.app.current_moist_h)
             self.ser.write(status.encode('ascii'))
 
             print("D,{},{},{},{},{}".format(self.app.current_temp_l, self.app.current_temp_h, self.app.current_light_h,
@@ -71,18 +73,27 @@ class HomeScreen(Screen):
         # serial write button states
         # ser = serial.Serial(self.com, self.baudrate)
         # sleep(2)
-        status = "S,{},{},{},{}\n".format(self.water_button, self.heat_button, self.light_button, self.fan_button)
+        status = "S,{},{},{},{};".format(self.water_button, self.heat_button, self.light_button, self.fan_button)
         self.ser.write(status.encode('ascii'))
+
+    def send_emptyLine(self, *args):
+
+
+
 
     def update_labels(self, *args):
         # ser = serial.Serial(self.com, self.baudrate)
         # sleep(2)
         # get the most recent data
-        while self.ser.inWaiting() > 0:
-            status = self.ser.readline()
-            status = status.decode('ascii').strip()
-            if "echo" in status:
-                print(status)
+        # while self.ser.inWaiting() > 0:
+        #     status = self.ser.readline()
+        #     status = status.decode('ascii').strip()
+        #     if "echo" in status:
+        #         print(status)
+
+        status = self.ser.readline()
+        status = status.decode('ascii')
+
         data = status
         print(data)
         if data.count(",") == 2:
@@ -90,5 +101,3 @@ class HomeScreen(Screen):
             self.moist_text = "Moisture: " + moist
             self.temp_text = "Temperature: " + temp
             self.co2_text = "CO2: " + co2
-
-

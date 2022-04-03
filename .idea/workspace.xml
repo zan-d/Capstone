@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d65fce26-ecea-4284-97d2-f5a603153729" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Automation_Main/Automation_Main.ino" beforeDir="false" afterPath="$PROJECT_DIR$/Automation_Main/Automation_Main.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SerialWrite.py" beforeDir="false" afterPath="$PROJECT_DIR$/SerialWrite.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/main.ino" beforeDir="false" afterPath="$PROJECT_DIR$/main/main.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/.idea/python_code.iml" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/.idea/python_code.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/boxlayout_action_bar.kv" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/boxlayout_action_bar.kv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/boxlayout_action_bar.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/boxlayout_action_bar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/home.kv" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/home.kv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/home.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/iGrow.kv" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/iGrow.kv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/navigation_screen_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/navigation_screen_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/plant_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/plant_data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/plants.kv" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/plants.kv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_code/plants.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_code/plants.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="27AhbLc2982dFEiHJeshP7UdWPH" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="home" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\hanso\AppData\Local\Programs\Python\Python310\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python_code" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python_code/home.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\hanso\AppData\Local\Programs\Python\Python310\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python_code" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python_code/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.home" />
+      <item itemvalue="Python.main" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d65fce26-ecea-4284-97d2-f5a603153729" name="Changes" comment="" />
+      <created>1648768868707</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1648768868707</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
