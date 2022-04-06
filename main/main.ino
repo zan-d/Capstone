@@ -9,6 +9,10 @@ int waterPump = 0;
 int heater = 0;
 int lightLamp = 0;
 int fan = 0;
+const int BUFFER_SIZE = 100;
+String Final_Message = "";
+
+
 #include <math.h>
 //global values 
  
@@ -126,6 +130,61 @@ char sendMsgToPi() {
 
 
 
+bool  lastMsg() {
+  char *strings[BUFFER_SIZE];
+  char *ptr = NULL; 
+  int index = 0;
+  
+  if (Serial.available()) {
+      char msg[BUFFER_SIZE];
+      String stringMsg = Serial.readString();
+      Serial.print("Input String: \t");
+      Serial.println(stringMsg);
+      if (stringMsg.length() < 15) {
+        Final_Message = stringMsg.substring(0,stringMsg.length()-2);
+      } else {
+           for (int i = 0; i < stringMsg.length(); i++) {
+              msg[i] = stringMsg.charAt(i);
+           }    
+           ptr = strtok(msg, ";");
+//           Serial.print("first ptr \t");
+//           Serial.println(ptr);
+          while (ptr != NULL) {
+              strings[index] = ptr;
+              index++;
+              ptr = strtok(NULL,";");
+//              Serial.print("i ptr \t");
+//              Serial.println(ptr);
+           }
+            
+            index = index-2;
+//            Serial.print("index: ");
+//            Serial.println(index); 
+            
+            String test1 = strings[index];
+//            Serial.print("strings[index] message: ");
+//            Serial.println(strings[index]); 
+            Final_Message = strings[index];
+//                Serial.print("test1: \t");
+//      Serial.println(test1);  
+             
+      //      for (int i =0; i <= index ; i++) {
+      //        Final_Message = Final_Message.substring(0,Final_Message.length()-1) + char(*strings[i]); 
+      //      }
+      //      Final_Message = Final_Message.substring(0,Final_Message.length()-1) + '\0';
+      //      Serial.print("Final message: ");
+      //      Serial.println(Final_Message);   
+      }
+      
+      
+      Serial.print("Final Message: \t");
+      Serial.println(Final_Message);    
+      return true;
+  } else { return false;}
+  
+}
+
+
 char readMsgFromPi() {
   //"D,temp low, temp high, hours of light, moisture low, moisture high"
   //"S,(0/1) for waterPump,(0/1) for heater, (0,1) for lightlamp, (0,1) for fan)
@@ -134,15 +193,18 @@ char readMsgFromPi() {
   //  S: Set up by User - when an user changes environment such as temp or light
   //  N: No msg available - no updates of Message  
     char msgType = 'N';
-    if (Serial.available()){ 
-          String stringMsg = Serial.readString();
-          Serial.print("Input String: \t");
-          Serial.println(stringMsg);
+    bool msgFlag = lastMsg();
+//    Serial.print("msgFlag = \t");
+//    Serial.println(msgFlag);
+//    Serial.print("Final_Message= \t");
+//    Serial.println(Final_Message);
+    
+    if (msgFlag){ 
           
           //char msg[] = "D,100,200,200,8,20,40";
           char msg[] = "                           ";
-          for (int i = 0; i < stringMsg.length(); i++) {
-              msg[i] = stringMsg.charAt(i);
+          for (int i = 0; i < Final_Message.length(); i++) {
+              msg[i] = Final_Message .charAt(i);
             }
           char msgType;        
           char *strings[7];
@@ -192,7 +254,7 @@ char readMsgFromPi() {
 
 void setup() { 
  Serial.begin(57600);
- 
+ //Serial.begin(115200);
   //Water Pump: 4
   //Heater: 5
   //Light 6
@@ -207,8 +269,6 @@ void setup() {
 } 
 
  
-const int BUFFER_SIZE = 100;
-char buf[BUFFER_SIZE];
 
 
 
@@ -220,7 +280,7 @@ void loop() {
     moistureVal = findMoisture() ;
     tempVal = findTemp() ;
     CO2Val = findCO2() ;
-    
+    /*
     if (Serial.available()) {
           String stringMsg = Serial.readString();
     //      Stream msg = Serial.readByteUntil();
@@ -231,21 +291,22 @@ void loop() {
           Serial.println("No message from python");  
     
     }
+    */
     
-    /*
+   /* 
     if (Serial.available() > 0) {
       // read the incoming bytes:
       int rlen = Serial.readBytesUntil('\n', buf, BUFFER_SIZE);
       // prints the received data
       //Serial.print("Input: ");
       for(int i = 0; i < rlen; i++) {
-      //  Serial.print(buf[i]);
+      //Serial.print(buf[i]);
       }
     } else {
-        Serial.println("no message from python");  
+      //Serial.println("no message from python");  
     }
-*/
-  /*
+
+  
    char *strings[BUFFER_SIZE];
    char *ptr = NULL; 
    int index = 0;
@@ -264,8 +325,11 @@ void loop() {
      Serial.print("\t");
      Serial.println(strings[n]);
   } 
-  */ 
-  delay(10);
+  */
+
+
+  
+  //delay(10);
 
 
     
@@ -278,53 +342,39 @@ void loop() {
 //    Serial.println("CO2 Level: ");
 //    Serial.println(CO2Val);
 //    Serial.println("\n"); 
-//    char type = readMsgFromPi();
-//    Serial.println(moistureVal + String(",") + tempVal + String(",") + CO2Val);
+    
+    Serial.println(moistureVal + String(",") + tempVal + String(",") + CO2Val);
 //    Serial.print("return");
 //    Serial.println(type);
+ 
+ 
     
-//int waterPump = 0;
-//int heater = 0;
-//int lightLamp = 0;
-//int fan = 0;
-/*    if ( waterPump == 1) {
-       digitalWrite(4,waterPump)
-    } else {
-      
-    }
-
-    if ( heater == 1) {
-        digitalWrite(5,heater);
-    }
-
-    if ( lightLamp == 1) {
-        digitalWrite(6,lightLamp);
-    }
-
-    if ( fan == 1) {
-        digitalWrite(7,fan);
-    }
-*/      
-  /*
-  digitalWrite(4,waterPump);
-  delay(100);
-  digitalWrite(5,heater);
-  delay(100);
+  char type = readMsgFromPi();
+  //  bool flag = lastMsg();
+  
+  digitalWrite(4,fan);
+  delay(10);
+  digitalWrite(5,waterPump);
+  delay(10);
   digitalWrite(6,lightLamp);
-  delay(100);
-  digitalWrite(7,fan);
-  delay(100);
-*/
-   // Serial.print("waterPumpVal \t");
-   // Serial.println(waterPump);
-   // Serial.print("lightVal \t");
-   // Serial.println(lightLamp);
-    
-
-          
+  delay(10);
+  digitalWrite(7,heater);
+  delay(10);
+  /*
+    Serial.print("waterPumpVal \t");
+    Serial.print(waterPump);
+    Serial.print("\tlightVal \t");
+    Serial.print(lightLamp);
+    Serial.print("\t heater \t");
+    Serial.print(heater);
+    Serial.print("\t fan \t");
+    Serial.println(fan);
+  */
+         
   //  delay(5000);
 
+//light 
+//fan works (pin4)
 //S,1,0,1,0
-
-    
+//S,1,0,0,0;S,1,0,1,0;S,1,1,1,0
 }

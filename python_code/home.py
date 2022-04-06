@@ -11,9 +11,9 @@ Builder.load_file("home.kv")
 
 class HomeScreen(Screen):
     app = App.get_running_app()
-    temp_text = StringProperty("Temperature")
-    moist_text = StringProperty("Moisture")
-    co2_text = StringProperty("CO2")
+    temp_text = StringProperty("Temperature: (Celsius)")
+    moist_text = StringProperty("Moisture: %")
+    co2_text = StringProperty("CO2: ppm")
 
     def __init__(self, **kwargs):
         super(HomeScreen, self).__init__(**kwargs)
@@ -22,24 +22,23 @@ class HomeScreen(Screen):
         self.light_button = 0
         self.heat_button = 0
 
-        self.com = 'COM8'
+        self.com = 'COM9'
         self.baudrate = 57600
         self.ser = serial.Serial(self.com, self.baudrate)
         sleep(2)
-        Clock.schedule_interval(self.update_labels, 10)
-        Clock.schedule_interval(self.send_emtpyLine, 2)
+        Clock.schedule_interval(self.update_labels, 5)
+        # Clock.schedule_interval(self.send_emptyLine, 10)
 
     def plant_details(self):
         if self.app.current_plant != "Please select plant":
             # serial write ideal plant properties
             # with serial.Serial(self.com, self.baudrate) as ser:
-            status = "D,{},{},{},{},{}\n".format(self.app.current_temp_l, self.app.current_temp_h,
+            status = "D,{},{},{},{},{};".format(self.app.current_temp_l, self.app.current_temp_h,
                                                  self.app.current_light_h,
                                                  self.app.current_moist_l, self.app.current_moist_h)
             self.ser.write(status.encode('ascii'))
 
-            print("D,{},{},{},{},{}".format(self.app.current_temp_l, self.app.current_temp_h, self.app.current_light_h,
-                                            self.app.current_moist_l, self.app.current_moist_h))
+            print(status)
             self.ids.selected_plant.text = "Ideal temperature range: {} - {} (Celcius)\n" \
                                            "Ideal soil pH range: {} - {}\n" \
                                            "Hours of light needed: {}\n" \
@@ -68,32 +67,39 @@ class HomeScreen(Screen):
 
         # print("Water: {} Heat: {} Light: {} Fan: {}".format(self.water_button, self.heat_button, self.light_button,
         #                                                     self.fan_button))
-        print("S,{},{},{},{}".format(self.water_button, self.heat_button, self.light_button, self.fan_button))
+        # print("S,{},{},{},{}".format(self.water_button, self.light_button, self.heat_button, self.fan_button))
 
         # serial write button states
         # ser = serial.Serial(self.com, self.baudrate)
         # sleep(2)
-        status = "S,{},{},{},{};".format(self.water_button, self.heat_button, self.light_button, self.fan_button)
+        status = "S,{},{},{},{},0;".format(self.water_button, self.light_button, self.heat_button, self.fan_button)
+        print(status)
         self.ser.write(status.encode('ascii'))
 
-    def send_emptyLine(self, *args):
+
+
+    # def send_emptyLine(self, *args):
+    #     print("callback function called")
+    #     status = "fin\r\n"
+    #     self.ser.write(status.encode('ascii'))
 
 
 
 
     def update_labels(self, *args):
         # ser = serial.Serial(self.com, self.baudrate)
-        # sleep(2)
+        # sleep(1)
         # get the most recent data
-        # while self.ser.inWaiting() > 0:
-        #     status = self.ser.readline()
-        #     status = status.decode('ascii').strip()
-        #     if "echo" in status:
-        #         print(status)
-
-        status = self.ser.readline()
-        status = status.decode('ascii')
-
+        status = ""
+        while self.ser.inWaiting() > 0:
+            status = self.ser.readline()
+            status = status.decode('ascii').strip()
+            if "Input" in status:
+                print(status)
+        
+        # status = self.ser.readline()
+        # status = status.decode('ascii')
+        
         data = status
         print(data)
         if data.count(",") == 2:
